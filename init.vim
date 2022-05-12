@@ -85,6 +85,7 @@ endif
 
 " Formatting {{{
 filetype plugin indent on
+set autochdir
 set autoindent
 set expandtab
 set formatoptions+=r
