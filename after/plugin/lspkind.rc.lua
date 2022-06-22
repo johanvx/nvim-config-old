@@ -1,16 +1,16 @@
 local status, lspkind = pcall(require, "lspkind")
-if (not status) then
-    return
-end
-
-local status, cmp = pcall(require, "cmp")
-if (not status) then
+if not status then
     return
 end
 
 -- Using nvim-cmp
+local status, cmp = pcall(require, "cmp")
+if not status then
+    return
+end
 
-cmp.setup {
+-- Options {{{
+cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol', -- show only symbol annotations
@@ -24,4 +24,7 @@ cmp.setup {
       end
     })
   }
-}
+})
+-- }}}
+
+-- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:

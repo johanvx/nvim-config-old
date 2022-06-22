@@ -12,7 +12,7 @@ map("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 
 -- Options {{{
 -- Each of these are documented in `:help nvim-tree.OPTION_NAME`
-require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+require'nvim-tree'.setup({ -- BEGIN_DEFAULT_OPTS
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_cursor = false,
@@ -123,6 +123,7 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
       profile = false,
     },
   },
-} -- END_DEFAULT_OPTS
+}) -- END_DEFAULT_OPTS
+-- }}}
 
 -- vim: set sw=2 ts=2 sts=2 et tw=80 fdm=marker fdl=0:

@@ -1,14 +1,10 @@
 local status, Comment = pcall(require, "Comment")
-if (not status) then
+if not status then
   return
 end
 
--- Maps {{{
-local map
--- }}}
-
 -- Options {{{
-Comment.setup {
+Comment.setup({
   ---Add a space b/w comment and the line
   ---@type boolean|fun():boolean
   padding = true,
@@ -75,7 +71,7 @@ Comment.setup {
   ---Post-hook, called after commenting is done
   ---@type fun(ctx: Ctx)
   post_hook = nil,
-}
+})
 -- }}}
 
 -- vim: set sw=2 ts=2 sts=2 et tw=80 fdm=marker fdl=0:

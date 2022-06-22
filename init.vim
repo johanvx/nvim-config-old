@@ -112,10 +112,11 @@ runtime maps.vim
 
 " File types {{{
 autocmd BufNewFile,BufRead *.tex set filetype=tex
+autocmd BufNewFile,BufRead *.h set filetype=c
 " }}}
 
 " Extras {{{
 set exrc
 " }}}
 
-" vim: set sw=4 ts=4 sts=4 et tw=80 fdm=marker fdl=0:
+" vim: set sw=4 ts=4 sts=4 et tw=80 cc=+1 fdm=marker fdl=0:

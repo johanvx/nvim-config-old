@@ -1,12 +1,13 @@
-if !exists('LspColors')
+if !exists('#LspColors')
   finish
 endif
 
 lua << EOF
 local status, LspColors = pcall(require, "lsp-colors")
-if (not status) then
+if not status then
   return
 end
+
 -- Options {{{
 local dracula = {
   background = "#282A36",
@@ -22,13 +23,13 @@ local dracula = {
   pink = "#FF79C6",
 }
 
-LspColors.setup {
-  Error = dracula.red
-  Warning = dracula.yellow
-  Information = dracula.cyan
-  Hint = dracula.green
-}
+LspColors.setup({
+  Error = dracula.red,
+  Warning = dracula.yellow,
+  Information = dracula.cyan,
+  Hint = dracula.green,
+})
 -- }}}
 EOF
 
-" vim: set sw=2 ts=2 sts=2 et tw=80 fdm=marker fdl=0:
+" vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:

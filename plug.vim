@@ -3,9 +3,8 @@ if has('nvim')
 endif
 
 call plug#begin()
-
 " Colorscheme {{{
-Plug 'dracula/vim', { 'as': 'vim' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 " }}}
 
 " General {{{ 
@@ -29,7 +28,6 @@ if has('nvim')
     Plug 'folke/lsp-colors.nvim'
     Plug 'folke/lua-dev.nvim'
     Plug 'folke/which-key.nvim'
-    Plug 'github/copilot.vim'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -37,6 +35,8 @@ if has('nvim')
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/vim-vsnip'
+    Plug 'kevinhwang91/nvim-ufo'
+    Plug 'kevinhwang91/promise-async'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'lukas-reineke/indent-blankline.nvim'
@@ -54,6 +54,8 @@ if has('nvim')
     Plug 'williamboman/nvim-lsp-installer'
     Plug 'windwp/nvim-autopairs'
     Plug 'windwp/nvim-ts-autotag'
+    Plug 'xiyaowong/nvim-transparent'
+    Plug 'xiyaowong/virtcolumn.nvim'
 endif
 " }}}
 
@@ -75,7 +77,6 @@ if !has('nvim')
     Plug 'preservim/nerdtree'
     Plug 'preservim/vimux'
     Plug 'ryanoasis/vim-devicons'
-    Plug 'skywind3000/asyncrun.vim'
     Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-flagship'
     Plug 'tpope/vim-markdown'
@@ -83,9 +84,9 @@ if !has('nvim')
     Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-vinegar'
+    Plug 'tribela/vim-transparent'
 endif
 " }}}
-
 call plug#end()
 
-" vim: set sw=4 ts=4 sts=4 et tw=80 fdm=marker fdl=0:
+" vim: set sw=4 ts=4 sts=4 et tw=80 cc=+1 fdm=marker fdl=0:
