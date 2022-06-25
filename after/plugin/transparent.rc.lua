@@ -5,6 +5,13 @@ end
 
 vim.g['transparent_enabled'] = true
 
+-- Maps {{{
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+map("n", "<leader>tt", ":TransparentToggle<cr>", opts)
+-- }}}
+
 -- Options {{{
 transparent.setup({
   enable = true, -- boolean: enable transparent
@@ -21,7 +28,7 @@ transparent.setup({
     "BufferLineIndicatorSelected",
   },
   -- extra_groups = "all",
- 
+
   exclude = {}, -- table: groups you don't want to clear
 
   -- You can also set the groups option to override the default groups.

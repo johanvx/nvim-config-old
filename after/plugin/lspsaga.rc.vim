@@ -3,15 +3,18 @@ if !exists('g:loaded_lspsaga')
 endif
 
 lua << EOF
-local saga = require 'lspsaga'
+local status, lspsaga = pcall(require, "lspsaga")
+if not status then
+  return
+end
 
-saga.init_lsp_saga {
+lspsaga.init_lsp_saga({
   error_sign = 'E',
   warn_sign = 'W',
   hint_sign = 'H',
   infor_sign = 'I',
   border_style = "round",
-}
+})
 
 EOF
 

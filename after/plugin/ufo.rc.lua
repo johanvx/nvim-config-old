@@ -28,10 +28,8 @@ capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
 }
-local language_servers = { "bashls", "clangd", "rust_analyzer", "tsserver",
-                           "eslint", "ltex", "tailwindcss", "vimls", "jsonls",
-                           "sumneko_lua" }
-
+local language_servers = { "bashls", "clangd", "rust_analyzer", "eslint", "html",
+                           "ltex", "vimls", "jsonls", "pyright", "sumneko_lua" }
 for _, ls in ipairs(language_servers) do
     lspconfig[ls].setup({
         capabilities = capabilities,
