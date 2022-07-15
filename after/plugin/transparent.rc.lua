@@ -3,18 +3,16 @@ if not status then
   return
 end
 
-vim.g['transparent_enabled'] = true
+vim.g['transparent_enabled'] = false
 
 -- Maps {{{
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-map("n", "<leader>tt", ":TransparentToggle<cr>", opts)
+local map = vim.keymap.set
+map("n", "<Leader>tt", "<Cmd>TransparentToggle<CR>")
 -- }}}
 
 -- Options {{{
 transparent.setup({
-  enable = true, -- boolean: enable transparent
+  enable = vim.g['transparent_enabled'], -- boolean: enable transparent
 
   -- table/string: additional groups that should be cleared
   -- In particular, when you set it to 'all', that means all available groups

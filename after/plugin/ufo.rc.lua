@@ -1,41 +1,26 @@
-local status, ufo = pcall(require, "ufo")
+local status, ufo
+status, ufo = pcall(require, "ufo")
 if not status then
   return
 end
 
-local status, async = pcall(require, "async")
-if not status then
-  return
-end
+-- local async
+-- status, async = pcall(require, "async")
+-- if not status then
+--   return
+-- end
 
 -- Config {{{
 vim.wo.foldcolumn = "1"
--- vim.wo.foldlevel = 99 -- feel free to decrease the value
-vim.wo.foldlevel = 20
+vim.wo.foldlevel = 99 -- feel free to decrease the value
 vim.wo.foldenable = true
+vim.o.foldlevelstart = -1
 -- }}}
 
--- nvim lsp as LSP client {{{
--- tell the server the capability of foldingRange
--- nvim hasn't added foldingRange to default capabilities, users must add it
--- manually
-local status, lspconfig = pcall(require, "lspconfig")
-if not status then
-  return
-end
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-}
-local language_servers = { "bashls", "clangd", "rust_analyzer", "eslint", "html",
-                           "ltex", "vimls", "jsonls", "pyright", "sumneko_lua" }
-for _, ls in ipairs(language_servers) do
-    lspconfig[ls].setup({
-        capabilities = capabilities,
-        other_fields = ...
-    })
-end
+-- Mappings{{{
+local map = vim.keymap.set
+map('n', 'zR', ufo.openAllFolds)
+map('n', 'zM', ufo.closeAllFolds)
 -- }}}
 
 -- Options {{{
@@ -68,9 +53,13 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     return newVirtText
 end
 
--- global handler
 ufo.setup({
-    fold_virt_text_handler = handler
+  -- global handler
+  fold_virt_text_handler = handler,
+  -- use treesitter as the main provider
+  provider_selector = function(bufnr, filetype)
+    return {'treesitter', 'indent'}
+  end
 })
 
 -- buffer scope handler

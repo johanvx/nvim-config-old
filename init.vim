@@ -49,9 +49,9 @@ set background=dark " Assume a dark background by default
 set backspace=indent,eol,start
 set cmdheight=2
 set cursorline
-set foldenable " Auto fold code
-set foldlevel=100
-set foldmethod=marker
+" set foldenable " Auto fold code
+" set foldlevel=100
+" set foldmethod=marker
 set hlsearch
 set ignorecase
 set incsearch
@@ -100,6 +100,7 @@ set tabstop=4
 
 " Plugins {{{
 runtime plug.vim
+runtime ensure-installed-lsp-list.lua
 " }}}
 
 " Colorscheme {{{
@@ -111,8 +112,8 @@ runtime maps.vim
 " }}}
 
 " File types {{{
-autocmd BufNewFile,BufRead *.tex set filetype=tex
 autocmd BufNewFile,BufRead *.h set filetype=c
+autocmd BufNewFile,BufRead *.tex set filetype=tex
 " }}}
 
 " Extras {{{

@@ -3,18 +3,20 @@ if !exists('g:lspconfig')
 endif
 
 lua << EOF
--- vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level('debug')
 EOF
 
 lua << EOF
-local status, nvim_lsp = pcall(require, "lspconfig")
+local status, lspconfig = pcall(require, 'lspconfig')
 if not status then
   return
 end
-local status, protocol = pcall(require, "vim.lsp.protocol")
+local status, protocol = pcall(require, 'vim.lsp.protocol')
 if not status then
   return
 end
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local lsp_installer_servers = require('nvim-lsp-installer.servers')
 
 -- Maps {{{
 -- local opts = { noremap=true, silent=true }
@@ -39,7 +41,7 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
     vim.api.nvim_command [[augroup END]]
   end
 
@@ -73,35 +75,54 @@ local on_attach = function(client, bufnr)
   }
 end
 
-
+-- General setup for LSPs {{{
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local capabilities = cmp_nvim_lsp.update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
-nvim_lsp.flow.setup {
+local language_servers = vim.g["ensure_installed_lsp_list"]
+for _, ls in ipairs(language_servers) do
+  lspconfig[ls].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    other_fields = ...
+  })
+end
+-- }}}
+
+-- denols {{{
+lspconfig.denols.setup({
   on_attach = on_attach,
+  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+  capabilities = capabilities
+})
+-- }}}
+
+-- tsserver {{{
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
+  root_dir = lspconfig.util.root_pattern("tsconfig.json", "jsconfig.json"),
   capabilities = capabilities
 }
+-- }}}
 
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-  capabilities = capabilities
-}
-
-nvim_lsp.diagnosticls.setup {
+-- diagnosticls {{{
+lspconfig.diagnosticls.setup {
   on_attach = on_attach,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript',
                 'typescriptreact', 'css', 'less', 'scss', 'pandoc' },
   init_options = {
     linters = {
       eslint = {
-        command = 'eslint_d',
+        -- command = 'eslint_d',
+        command = './node_modules/.bin/eslint',
         rootPatterns = { '.git' },
         debounce = 100,
         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint_d',
+        -- sourceName = 'eslint_d',
+        sourceName = 'eslint',
         parseJson = {
           errorsRoot = '[0].messages',
           line = 'line',
@@ -114,7 +135,8 @@ nvim_lsp.diagnosticls.setup {
         securities = {
           [2] = 'error',
           [1] = 'warning'
-        }
+        },
+        requiredFiles = { '.eslintrc.json' }
       },
     },
     filetypes = {
@@ -124,17 +146,18 @@ nvim_lsp.diagnosticls.setup {
       typescriptreact = 'eslint',
     },
     formatters = {
-      eslint_d = {
-        command = 'eslint_d',
-        rootPatterns = { '.git' },
-        args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-        rootPatterns = { '.git' },
-      },
+      -- eslint_d = {
+      -- command = 'eslint_d',
+      --   rootPatterns = { '.git' },
+      --   args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
+      --   rootPatterns = { '.git' },
+      -- },
       prettier = {
-        command = 'prettier_d_slim',
+        -- command = 'prettier_d_slim',
+        command = './node_modules/.bin/prettier',
         rootPatterns = { '.git' },
-        -- requiredFiles: { 'prettier.config.js' },
-        args = { '--stdin', '--stdin-filepath', '%filename' }
+        args = { '--stdin', '--stdin-filepath', '%filename' },
+        requiredFiles = { 'prettier.config.js' }
       }
     },
     formatFiletypes = {
@@ -150,9 +173,40 @@ nvim_lsp.diagnosticls.setup {
     }
   }
 }
+-- }}}
 
--- icon
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+-- sumneko_lua {{{
+lspconfig.sumneko_lua.setup({
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
+-- }}}
+
+-- texlab {{{
+lspconfig.texlab.setup({
+})
+-- }}}
+
+-- icon {{{
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
     -- This sets the spacing and the prefix, obviously.
@@ -162,7 +216,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
   }
 )
-
+-- }}}
 EOF
 
 " vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:

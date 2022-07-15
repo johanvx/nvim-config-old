@@ -1,19 +1,19 @@
 local status, telescope = pcall(require, "telescope")
-if (not status) then
+if not status then
     return
 end
 
 -- Maps {{{
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-map("n", "<leader>sb", "<cmd>Telescope buffers<cr>", opts)
-map("n", "<leader>sc", "<cmd>Telescope commands<cr>", opts)
-map("n", "<leader>sf", "<cmd>Telescope find_files<cr>", opts)
-map("n", "<leader>sg", "<cmd>Telescope live_grep<cr>", opts)
-map("n", "<leader>sh", "<cmd>Telescope help_tags<cr>", opts)
-map("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", opts)
-map("n", "<leader>ss", "<cmd>Telescope builtin<cr>", opts)
+local map = vim.keymap.set
+map("n", "<Leader>sb", "<Cmd>Telescope buffers<CR>")
+map("n", "<Leader>sc", "<Cmd>Telescope commands<CR>")
+map("n", "<Leader>sd", "<Cmd>Telescope diagnostics<CR>")
+map("n", "<Leader>sf", "<Cmd>Telescope find_files<CR>")
+map("n", "<Leader>sg", "<Cmd>Telescope live_grep<CR>")
+map("n", "<Leader>sh", "<Cmd>Telescope help_tags<CR>")
+map("n", "<Leader>sk", "<Cmd>Telescope keymaps<CR>")
+map("n", "<Leader>ss", "<Cmd>Telescope builtin<CR>")
+map("n", "<Leader>sn", "<Cmd>Telescope notify<CR>")
 -- }}}
 
 -- Options {{{

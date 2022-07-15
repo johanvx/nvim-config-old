@@ -4,15 +4,13 @@ if (not status) then
 end
 
 -- Maps {{{
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-map("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+local map = vim.keymap.set
+map("n", "<Leader>e", "<Cmd>NvimTreeToggle<CR>")
 -- }}}
 
 -- Options {{{
 -- Each of these are documented in `:help nvim-tree.OPTION_NAME`
-require'nvim-tree'.setup({ -- BEGIN_DEFAULT_OPTS
+tree.setup({
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_cursor = false,
@@ -123,7 +121,7 @@ require'nvim-tree'.setup({ -- BEGIN_DEFAULT_OPTS
       profile = false,
     },
   },
-}) -- END_DEFAULT_OPTS
+})
 -- }}}
 
 -- vim: set sw=2 ts=2 sts=2 et tw=80 fdm=marker fdl=0:

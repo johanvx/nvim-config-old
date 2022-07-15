@@ -1,15 +1,18 @@
--- Maps {{{ 
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local status, bufferline = pcall(require, "bufferline")
+if not status then
+    return
+end
 
-map("n", "<s-h>", ":BufferPrevious<cr>", opts)
-map("n", "<s-l>", ":BufferNext<cr>", opts)
-map("n", "<leader>c", ":BufferClose<cr>", opts)
+-- Maps {{{
+local map = vim.keymap.set
+map("n", "<S-h>", "<Cmd>BufferPrevious<CR>")
+map("n", "<S-l>", "<Cmd>BufferNext<CR>")
+map("n", "<Leader>c", "<Cmd>BufferClose<CR>")
 -- }}}
 
 -- Options {{{
 -- Set barbar's options
-vim.g.bufferline = {
+bufferline.setup {
   -- Enable/disable animations
   animation = true,
 
@@ -75,6 +78,25 @@ vim.g.bufferline = {
   -- where X is the buffer number. But only a static string is accepted here.
   no_name_title = nil,
 }
+-- }}}
+
+-- nvim-tree compatibility {{{
+local status, nvim_tree_events = pcall(require, "nvim-tree.events")
+if not status then
+    return
+end
+local status, bufferline_state = pcall(require, "bufferline.state")
+if not status then
+    return
+end
+
+nvim_tree_events.on_tree_open(function ()
+  bufferline_state.set_offset(31, "File Tree")
+end)
+
+nvim_tree_events.on_tree_close(function ()
+  bufferline_state.set_offset(0)
+end)
 -- }}}
 
 -- vim: set sw=2 ts=2 sts=2 et tw=80 fdm=marker fdl=0:
