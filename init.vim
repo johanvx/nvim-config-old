@@ -100,7 +100,7 @@ set tabstop=4
 
 " Plugins {{{
 runtime plug.vim
-runtime ensure-installed-lsp-list.lua
+runtime ensure-installed-lsp-list.vim
 " }}}
 
 " Colorscheme {{{
@@ -120,4 +120,4 @@ autocmd BufNewFile,BufRead *.tex set filetype=tex
 set exrc
 " }}}
 
-" vim: set sw=4 ts=4 sts=4 et tw=80 cc=+1 fdm=marker fdl=0:
+" vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
