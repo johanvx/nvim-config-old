@@ -1,10 +1,14 @@
-if !exists('g:loaded_nvim_treesitter')
-  echom "Treesitter not loaded"
-  finish
-endif
+if vim.g["loaded_nvim_treesitter"] == nil then
+  print("Treesitter not loaded")
+  return
+end
 
-lua << EOF
 local status, treesitterconfigs = pcall(require, "nvim-treesitter.configs")
+if not status then
+  return
+end
+
+-- Options {{{
 treesitterconfigs.setup({
   highlight = {
     enable = true,
@@ -32,10 +36,9 @@ treesitterconfigs.setup({
     enable = true,
   }
 })
+-- }}}
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 
-EOF
-
-" vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+-- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
