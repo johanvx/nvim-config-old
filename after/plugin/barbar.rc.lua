@@ -5,9 +5,9 @@ end
 
 -- Maps {{{
 local map = vim.keymap.set
-map("n", "<S-h>", "<Cmd>BufferPrevious<CR>")
-map("n", "<S-l>", "<Cmd>BufferNext<CR>")
-map("n", "<Leader>c", "<Cmd>BufferClose<CR>")
+map("n", "<Leader>bh", "<Cmd>BufferPrevious<CR>")
+map("n", "<Leader>bl", "<Cmd>BufferNext<CR>")
+map("n", "<Leader>bq", "<Cmd>BufferClose<CR>")
 -- }}}
 
 -- Options {{{
