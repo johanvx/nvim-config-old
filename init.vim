@@ -6,31 +6,31 @@ scriptencoding utf-8
 
 " Stop loading config if it's on tiny or small
 if !1
-    finish
+  finish
 endif
 
 " Disable vi compatibility
 set nocompatible
 
 silent function! MACOS()
-    return has('macunix')
+  return has('macunix')
 endfunction
 
 silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
+  return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 
 silent function! WINDOWS()
-    return has('win32') || has('win64')
+  return has('win32') || has('win64')
 endfunction
 
 " Platform {{{
 if MACOS()
-    runtime macos.vim
+  runtime macos.vim
 endif
 
 if WINDOWS()
-    runtime windows.vim
+  runtime windows.vim
 endif
 " }}}
 
@@ -49,9 +49,6 @@ set background=dark " Assume a dark background by default
 set backspace=indent,eol,start
 set cmdheight=2
 set cursorline
-" set foldenable " Auto fold code
-" set foldlevel=100
-" set foldmethod=marker
 set hlsearch
 set ignorecase
 set incsearch
@@ -79,7 +76,7 @@ highlight clear SignColumn
 highlight clear LineNr
 
 if has('termguicolors')
-    set termguicolors
+  set termguicolors
 endif
 " }}}
 
@@ -108,6 +105,7 @@ colorscheme dracula
 " }}}
 
 " Maps {{{
+set timeoutlen=400
 runtime maps.vim
 " }}}
 

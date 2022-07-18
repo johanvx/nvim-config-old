@@ -26,6 +26,7 @@ Plug 'wellle/targets.vim'
 
 " Neovim {{{
 if has('nvim')
+  Plug 'chentoast/marks.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'folke/lua-dev.nvim'
   Plug 'folke/which-key.nvim'

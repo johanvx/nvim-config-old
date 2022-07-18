@@ -6,6 +6,8 @@ let maplocalleader = '\'
 " Bare {{{
 noremap j gj
 noremap k gk
+noremap gh <Home>
+noremap gl <End>
 
 nnoremap ; <S-V>
 nnoremap , <C-V>
@@ -15,13 +17,11 @@ nnoremap > >>
 
 " Keep block selection after shifts in visual mode
 xnoremap < <lt>gv
-xnoremap > >v
+xnoremap > >gv
 " }}}
 
 " Leader {{{
-
 " Common operations
-nnoremap <Leader>h <Cmd>nohlsearch<CR>
 nnoremap <Leader>wq <Cmd>confirm quit<CR>
 nnoremap <Leader>wa <Cmd>confirm quitall<CR>
 nnoremap <Leader>bw <Cmd>write<CR>
