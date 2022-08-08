@@ -46,6 +46,7 @@ if has('nvim')
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'lukas-reineke/lsp-format.nvim'
+  Plug 'nathom/filetype.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'numToStr/Comment.nvim'
   Plug 'nvim-lua/plenary.nvim'
