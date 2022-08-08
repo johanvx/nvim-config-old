@@ -3,6 +3,9 @@ if has('nvim')
 endif
 
 call plug#begin()
+" Use ssh instead of https
+let g:plug_url_format = 'git@github.com:%s.git'
+
 " Colorscheme {{{
 Plug 'dracula/vim', { 'as': 'dracula' }
 " }}}
@@ -28,7 +31,9 @@ Plug 'wellle/targets.vim'
 if has('nvim')
   Plug 'SmiteshP/nvim-navic'
   Plug 'akinsho/bufferline.nvim'
+  Plug 'arkav/lualine-lsp-progress'
   Plug 'chentoast/marks.nvim'
+  Plug 'edluffy/specs.nvim'
   Plug 'famiu/bufdelete.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'folke/lua-dev.nvim'

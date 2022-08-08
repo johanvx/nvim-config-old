@@ -31,6 +31,8 @@ lualine.setup({
     }, {
       navic.get_location,
       cond = navic.is_available
+    }, {
+      "lsp_progress"
     }},
     lualine_x = {
       { "diagnostics",
