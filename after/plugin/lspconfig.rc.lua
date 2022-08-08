@@ -4,7 +4,7 @@ end
 
 -- vim.lsp.set_log_level("debug")
 
-local status, lspconfig, protocol, cmp_nvim_lsp, lsp_format
+local status, lspconfig, protocol, cmp_nvim_lsp, lsp_format, navic
 status, lspconfig = pcall(require, "lspconfig")
 if not status then
   return
@@ -25,6 +25,12 @@ if not status then
   return
 end
 
+status, navic = pcall(require, "nvim-navic")
+if not status then
+  return
+end
+
+
 -- Maps {{{
 -- local opts = { noremap=true, silent=true }
 
@@ -35,11 +41,12 @@ end
 -- buf_set_keymap("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 -- }}}
 
--- Custom on_attach using lukas-reineke/lsp-format.nvim {{{
+-- Customized on_attach {{{
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
-local on_attach = function(client)
+local on_attach = function(client, bufnr)
   lsp_format.on_attach(client)
+  navic.attach(client, bufnr)
   -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -175,11 +182,10 @@ lspconfig.diagnosticls.setup {
       javascript = "prettier",
       javascriptreact = "prettier",
       json = "prettier",
-      scss = "prettier",
       less = "prettier",
+      scss = "prettier",
       typescript = "prettier",
       typescriptreact = "prettier",
-      json = "prettier",
     }
   }
 }

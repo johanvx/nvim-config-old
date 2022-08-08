@@ -1,4 +1,11 @@
-local status, lualine = pcall(require, "lualine")
+local status, lualine, navic
+
+status, lualine = pcall(require, "lualine")
+if not status then
+    return
+end
+
+status, navic = pcall(require, "nvim-navic")
 if not status then
     return
 end
@@ -21,6 +28,9 @@ lualine.setup({
       "filename",
       file_status = true, -- displays file status (readonly status, modified status)
       path = 0 -- 0 = just filename, 1 = relative path, 2 = absolute path
+    }, {
+      navic.get_location,
+      cond = navic.is_available
     }},
     lualine_x = {
       { "diagnostics",

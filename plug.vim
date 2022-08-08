@@ -26,6 +26,7 @@ Plug 'wellle/targets.vim'
 
 " Neovim {{{
 if has('nvim')
+  Plug 'SmiteshP/nvim-navic'
   Plug 'akinsho/bufferline.nvim'
   Plug 'chentoast/marks.nvim'
   Plug 'famiu/bufdelete.nvim'
@@ -54,7 +55,6 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'onsails/lspkind-nvim'
   Plug 'rcarriga/nvim-notify'
-  " Plug 'romgrk/barbar.nvim'
   Plug 'tami5/lspsaga.nvim'
   Plug 'williamboman/nvim-lsp-installer'
   Plug 'windwp/nvim-autopairs'
