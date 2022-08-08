@@ -53,7 +53,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2 " Last window will always has a status line
-set lazyredraw " Disable autoredraw while executing macros, use `:redraw` to force an update
+" set lazyredraw " Disable autoredraw while executing macros, use `:redraw` to force an update
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.,eol:↴
 set matchtime=2 " Tenths of a second to show the matching paren
@@ -97,7 +97,6 @@ set tabstop=4
 
 " Plugins {{{
 runtime plug.vim
-runtime ensure-installed-lsp-list.vim
 " }}}
 
 " Colorscheme {{{
@@ -105,7 +104,7 @@ colorscheme dracula
 " }}}
 
 " Maps {{{
-set timeoutlen=400
+set timeoutlen=100
 runtime maps.vim
 " }}}
 

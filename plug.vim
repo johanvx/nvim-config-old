@@ -26,7 +26,9 @@ Plug 'wellle/targets.vim'
 
 " Neovim {{{
 if has('nvim')
+  Plug 'akinsho/bufferline.nvim'
   Plug 'chentoast/marks.nvim'
+  Plug 'famiu/bufdelete.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'folke/lua-dev.nvim'
   Plug 'folke/which-key.nvim'
@@ -42,6 +44,7 @@ if has('nvim')
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'lukas-reineke/lsp-format.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'numToStr/Comment.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -51,7 +54,7 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'onsails/lspkind-nvim'
   Plug 'rcarriga/nvim-notify'
-  Plug 'romgrk/barbar.nvim'
+  " Plug 'romgrk/barbar.nvim'
   Plug 'tami5/lspsaga.nvim'
   Plug 'williamboman/nvim-lsp-installer'
   Plug 'windwp/nvim-autopairs'
@@ -75,6 +78,7 @@ if !has('nvim')
   Plug 'liuchengxu/vim-which-key'
   Plug 'machakann/vim-sandwich'
   Plug 'markonm/traces.vim'
+  Plug 'mhinz/vim-startify'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree'
   Plug 'preservim/vimux'

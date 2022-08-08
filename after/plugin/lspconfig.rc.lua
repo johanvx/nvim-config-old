@@ -4,18 +4,26 @@ end
 
 -- vim.lsp.set_log_level("debug")
 
-local status, lspconfig
+local status, lspconfig, protocol, cmp_nvim_lsp, lsp_format
 status, lspconfig = pcall(require, "lspconfig")
 if not status then
   return
 end
-local protocol
+
 status, protocol = pcall(require, "vim.lsp.protocol")
 if not status then
   return
 end
 
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
+status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status then
+  return
+end
+
+status, lsp_format = pcall(require, "lsp-format")
+if not status then
+  return
+end
 
 -- Maps {{{
 -- local opts = { noremap=true, silent=true }
@@ -27,22 +35,24 @@ local cmp_nvim_lsp = require("cmp_nvim_lsp")
 -- buf_set_keymap("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 -- }}}
 
+-- Custom on_attach using lukas-reineke/lsp-format.nvim {{{
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+local on_attach = function(client)
+  lsp_format.on_attach(client)
+  -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- formatting
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-    vim.api.nvim_command [[augroup END]]
-  end
+  -- if client.server_capabilities.documentFormattingProvider then
+  --   vim.api.nvim_command [[augroup Format]]
+  --   vim.api.nvim_command [[autocmd! * <buffer>]]
+  --   vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+  --   vim.api.nvim_command [[augroup END]]
+  -- end
 
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
@@ -73,6 +83,7 @@ local on_attach = function(client, bufnr)
     "", -- TypeParameter
   }
 end
+-- }}}
 
 -- General setup for LSPs {{{
 -- Set up completion using nvim_cmp with LSP source
