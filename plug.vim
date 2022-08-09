@@ -38,6 +38,7 @@ if has('nvim')
   Plug 'folke/lsp-colors.nvim'
   Plug 'folke/lua-dev.nvim'
   Plug 'folke/which-key.nvim'
+  Plug 'glepnir/dashboard-nvim'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/cmp-nvim-lsp'
