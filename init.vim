@@ -39,7 +39,7 @@ syntax enable " Switch on syntax highlighting
 set encoding=utf-8
 set clipboard+=unnamedplus
 set fileencodings=utf-8,default,latin1
-set maxmempattern=1000000
+set maxmempattern=1048576
 set viewoptions=folds,options,cursor,unix,slash
 set virtualedit=onemore
 " }}}
@@ -52,8 +52,6 @@ set cursorline
 set hlsearch
 set ignorecase
 set incsearch
-set laststatus=2 " Last window will always has a status line
-" set lazyredraw " Disable autoredraw while executing macros, use `:redraw` to force an update
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.,eol:↴
 set matchtime=2 " Tenths of a second to show the matching paren
@@ -71,9 +69,10 @@ set title
 set whichwrap=b,s,h,l,<,>,[,]
 set wildmenu " Show list instead of just completing
 set wildmode=full
+set guifont=Hack\ Nerd\ Font\ Mono
 
-highlight clear SignColumn
-highlight clear LineNr
+" highlight clear SignColumn
+" highlight clear LineNr
 
 if has('termguicolors')
   set termguicolors
@@ -95,6 +94,9 @@ set softtabstop=4
 set tabstop=4
 " }}}
 
+set grepformat=%f:%l:%c:%m
+set grepprg=rg\ --hidden\ --vimgrep\ --smart-case\ --
+
 " Plugins {{{
 runtime plug.vim
 " }}}
@@ -104,17 +106,17 @@ colorscheme dracula
 " }}}
 
 " Maps {{{
-set timeoutlen=100
+set timeoutlen=500
 runtime maps.vim
 " }}}
 
 " File types {{{
-autocmd BufNewFile,BufRead *.h set filetype=c
-autocmd BufNewFile,BufRead *.tex set filetype=tex
+" autocmd BufNewFile,BufRead *.h set filetype=c
+" autocmd BufNewFile,BufRead *.tex set filetype=tex
 " }}}
 
 " Extras {{{
-set exrc
+" set exrc
 " }}}
 
-" vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+" vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:

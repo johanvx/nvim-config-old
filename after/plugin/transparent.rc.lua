@@ -3,16 +3,16 @@ if not status then
   return
 end
 
-vim.g['transparent_enabled'] = false
+vim.g["transparent_enabled"] = false
 
 -- Maps {{{
 local map = vim.keymap.set
-map("n", "<Leader>tt", "<Cmd>TransparentToggle<CR>")
+map("n", "<Leader>tt", transparent.toggle_transparent)
 -- }}}
 
 -- Options {{{
 transparent.setup({
-  enable = vim.g['transparent_enabled'], -- boolean: enable transparent
+  enable = vim.g["transparent_enabled"], -- boolean: enable transparent
 
   -- table/string: additional groups that should be cleared
   -- In particular, when you set it to 'all', that means all available groups
@@ -27,7 +27,8 @@ transparent.setup({
   },
   -- extra_groups = "all",
 
-  exclude = {}, -- table: groups you don't want to clear
+  -- table: groups you don't want to clear
+  exclude = { "DashboardHeader", "DashboardCenter", "DashboardShortCut", "DashboardFooter" },
 
   -- You can also set the groups option to override the default groups.
   --
@@ -38,4 +39,4 @@ transparent.setup({
 })
 -- }}}
 
--- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+-- vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:

@@ -6,17 +6,16 @@ call plug#begin()
 " Use ssh instead of https
 let g:plug_url_format = 'git@github.com:%s.git'
 
-" Colorscheme {{{
-Plug 'dracula/vim', { 'as': 'dracula' }
-" }}}
-
 " General {{{ 
+Plug 'jdhao/better-escape.vim'
 Plug 'joeky888/Ass.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mg979/vim-visual-multi'
 Plug 'preservim/vim-pencil'
+Plug 'rhysd/accelerated-jk'
 Plug 'ron-rs/ron.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asynctasks.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
@@ -29,10 +28,12 @@ Plug 'wellle/targets.vim'
 
 " Neovim {{{
 if has('nvim')
+  Plug 'Mofiqul/dracula.nvim'
   Plug 'SmiteshP/nvim-navic'
   Plug 'akinsho/bufferline.nvim'
   Plug 'arkav/lualine-lsp-progress'
   Plug 'chentoast/marks.nvim'
+  Plug 'ckipp01/stylua-nvim'
   Plug 'edluffy/specs.nvim'
   Plug 'famiu/bufdelete.nvim'
   Plug 'folke/lsp-colors.nvim'
@@ -48,7 +49,6 @@ if has('nvim')
   Plug 'hrsh7th/vim-vsnip'
   Plug 'kevinhwang91/nvim-ufo'
   Plug 'kevinhwang91/promise-async'
-  Plug 'kyazdani42/nvim-tree.lua'
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'lukas-reineke/lsp-format.nvim'
@@ -58,6 +58,7 @@ if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lualine/lualine.nvim'
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'onsails/lspkind-nvim'
@@ -76,6 +77,7 @@ if !has('nvim')
   Plug 'SirVer/ultisnips'
   Plug 'Yggdroot/indentLine'
   Plug 'dense-analysis/ale'
+  Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'easymotion/vim-easymotion'
   Plug 'haya14busa/incsearch-easymotion.vim'
   Plug 'haya14busa/incsearch.vim'

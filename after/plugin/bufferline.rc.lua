@@ -8,6 +8,8 @@ local map = vim.keymap.set
 map("n", "<Leader>bb", "<Cmd>BufferLinePick<CR>")
 map("n", "<Leader>bh", "<Cmd>BufferLineCyclePrev<CR>")
 map("n", "<Leader>bl", "<Cmd>BufferLineCycleNext<CR>")
+map("n", "<Leader>bH", "<Cmd>BufferLineMovePrev<CR>")
+map("n", "<Leader>bL", "<Cmd>BufferLineMoveNext<CR>")
 -- }}}
 
 -- Options {{{
@@ -67,13 +69,7 @@ bufferline.setup({
     --     return true
     --   end
     -- end,
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "File Explorer", -- string | function
-        text_align = "center" -- "left" | "center" | "right"
-      }
-    },
+    offsets = {},
     color_icons = true, -- bool, whether or not to add the filetype icon highlights
     -- show_buffer_icons = true | false, -- disable filetype icons for buffers
     -- show_buffer_close_icons = true | false,
@@ -94,4 +90,4 @@ bufferline.setup({
 })
 -- }}}
 
--- vim: set sw=2 ts=2 sts=2 et tw=80 fdm=marker fdl=0:
+-- vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:

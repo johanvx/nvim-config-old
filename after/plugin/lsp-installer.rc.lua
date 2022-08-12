@@ -19,4 +19,9 @@ lsp_installer.setup({
 })
 -- }}}
 
--- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+-- Maps {{{
+local map = vim.keymap.set
+map("n", "<Leader>l", "<Cmd>LspInstallInfo<CR>")
+-- }}}
+
+-- vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:

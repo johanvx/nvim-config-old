@@ -30,7 +30,6 @@ if not status then
   return
 end
 
-
 -- Maps {{{
 -- local opts = { noremap=true, silent=true }
 
@@ -42,7 +41,7 @@ end
 -- }}}
 
 -- Customized on_attach {{{
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   lsp_format.on_attach(client)
@@ -94,16 +93,13 @@ end
 
 -- General setup for LSPs {{{
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = cmp_nvim_lsp.update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
+local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local language_servers = vim.g["ensure_installed_lsp_list"]
-for _, ls in ipairs(language_servers) do
+for _, ls in pairs(language_servers) do
   lspconfig[ls].setup({
     on_attach = on_attach,
     capabilities = capabilities,
-    other_fields = ...
   })
 end
 -- }}}
@@ -112,87 +108,30 @@ end
 lspconfig.denols.setup({
   on_attach = on_attach,
   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-  capabilities = capabilities
+  capabilities = capabilities,
 })
 -- }}}
 
 -- tsserver {{{
-lspconfig.tsserver.setup {
+lspconfig.tsserver.setup({
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   root_dir = lspconfig.util.root_pattern("tsconfig.json", "jsconfig.json"),
-  capabilities = capabilities
-}
--- }}}
-
--- diagnosticls {{{
-lspconfig.diagnosticls.setup {
-  on_attach = on_attach,
-  filetypes = { "javascript", "javascriptreact", "json", "typescript",
-                "typescriptreact", "css", "less", "scss", "pandoc" },
-  init_options = {
-    linters = {
-      eslint = {
-        -- command = "eslint_d",
-        command = "./node_modules/.bin/eslint",
-        rootPatterns = { ".git" },
-        debounce = 100,
-        args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
-        -- sourceName = "eslint_d",
-        sourceName = "eslint",
-        parseJson = {
-          errorsRoot = "[0].messages",
-          line = "line",
-          column = "column",
-          endLine = "endLine",
-          endColumn = "endColumn",
-          message = "[eslint] ${message} [${ruleId}]",
-          security = "severity"
-        },
-        securities = {
-          [2] = "error",
-          [1] = "warning"
-        },
-        requiredFiles = { ".eslintrc.json" }
-      },
-    },
-    filetypes = {
-      javascript = "eslint",
-      javascriptreact = "eslint",
-      typescript = "eslint",
-      typescriptreact = "eslint",
-    },
-    formatters = {
-      -- eslint_d = {
-      -- command = "eslint_d",
-      --   rootPatterns = { ".git" },
-      --   args = { "--stdin", "--stdin-filename", "%filename", "--fix-to-stdout" },
-      --   rootPatterns = { ".git" },
-      -- },
-      prettier = {
-        -- command = "prettier_d_slim",
-        command = "./node_modules/.bin/prettier",
-        rootPatterns = { ".git" },
-        args = { "--stdin", "--stdin-filepath", "%filename" },
-        requiredFiles = { "prettier.config.js" }
-      }
-    },
-    formatFiletypes = {
-      css = "prettier",
-      javascript = "prettier",
-      javascriptreact = "prettier",
-      json = "prettier",
-      less = "prettier",
-      scss = "prettier",
-      typescript = "prettier",
-      typescriptreact = "prettier",
-    }
-  }
-}
+  capabilities = capabilities,
+})
 -- }}}
 
 -- sumneko_lua {{{
 lspconfig.sumneko_lua.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  commands = {
+    Format = {
+      function()
+        require("stylua-nvim").format_file()
+      end,
+    },
+  },
   settings = {
     Lua = {
       runtime = {
@@ -201,7 +140,7 @@ lspconfig.sumneko_lua.setup({
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {"vim"},
+        globals = { "vim" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -217,21 +156,18 @@ lspconfig.sumneko_lua.setup({
 -- }}}
 
 -- texlab {{{
-lspconfig.texlab.setup({
-})
+lspconfig.texlab.setup({})
 -- }}}
 
 -- icon {{{
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    -- This sets the spacing and the prefix, obviously.
-    virtual_text = {
-      spacing = 4,
-      prefix = ""
-    }
-  }
-)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = true,
+  -- This sets the spacing and the prefix, obviously.
+  virtual_text = {
+    spacing = 4,
+    prefix = "",
+  },
+})
 -- }}}
 
--- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+-- vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:

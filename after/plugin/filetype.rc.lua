@@ -3,8 +3,8 @@ if not status then
   return
 end
 
--- In init.lua or filetype.nvim's config file
-require("filetype").setup({
+-- Options {{{
+filetype.setup({
   overrides = {
     -- extensions = {
     --   -- Set the filetype of *.pn files to potion
@@ -51,5 +51,6 @@ require("filetype").setup({
     -- },
   },
 })
+-- }}}
 
--- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+-- vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:

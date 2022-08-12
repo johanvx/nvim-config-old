@@ -4,12 +4,6 @@ if not status then
   return
 end
 
--- local async
--- status, async = pcall(require, "async")
--- if not status then
---   return
--- end
-
 -- Config {{{
 vim.wo.foldcolumn = "1"
 vim.wo.foldlevel = 99 -- feel free to decrease the value
@@ -68,4 +62,4 @@ local bufnr = vim.api.nvim_get_current_buf()
 ufo.setFoldVirtTextHandler(bufnr, handler)
 -- }}}
 
--- vim: set sw=2 ts=2 sts=2 et tw=80 cc=+1 fdm=marker fdl=0:
+-- vim:sw=2:ts=2:sts=2:et:tw=80:cc=+1:fdm=marker:fdl=0:norl:
